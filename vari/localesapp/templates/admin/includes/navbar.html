@@ -1,0 +1,103 @@
+{% load admin_static %}
+{% load i18n admin_static %}
+        <!-- .navbar primera cabecera-->
+        <nav class="navbar navbar-inverse navbar-static-top">
+        
+            <!-- Logotipo -->
+            <header class="navbar-header">
+                <a href="{% url 'admin:index' %}" class="navbar-brand"><img src="{% static "admin/img/logo.png" %}" alt="Logo"></a>
+            </header>
+            
+            <!-- topnav right -->
+            <div class="topnav">
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <a data-placement="bottom" title="{% trans 'Mostrar/Ocultar menú' %}" data-original-title="{% trans 'Mostrar/Ocultar menú' %}" data-toggle="tooltip" class="btn btn-success btn-sm" id="changeSidebarPos">
+                            <i class="icon-resize-horizontal"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a data-placement="bottom" title="{% trans 'Mensajes' %}" data-original-title="{% trans 'Mensajes' %}" data-toggle="tooltip" class="btn btn-default btn-sm">
+                            <i class="icon-envelope"></i>
+                            <span class="label label-warning">5</span>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a data-placement="bottom" title="{% trans 'Documentos' %}" data-original-title="{% trans 'Documentos' %}" href="#" data-toggle="tooltip" class="btn btn-default btn-sm">
+                            <i class="icon-file"></i>
+                        </a>
+                        <a data-toggle="modal" title="{% trans 'Ayuda' %}" data-original-title="{% trans 'Ayuda' %}" data-placement="bottom" class="btn btn-default btn-sm" href="#helpModal">
+                            <i class="icon-question-sign"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a href="login.html" title="{% trans 'Salir' %}" data-toggle="tooltip" data-original-title="{% trans 'Salir' %}" data-placement="bottom" class="btn btn-metis-1 btn-sm">
+                            <i class="icon-off"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            {% if user.is_active and user.is_staff %}
+            <!-- /.topnav -->
+		    <div class="collapse navbar-collapse navbar-ex1-collapse">
+		        <!-- .nav -->
+		        {% trans 'Welcome,' %}
+		        <strong>{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</strong>.
+		        {% block userlinks %}
+		        <ul class="nav navbar-nav">
+		            <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
+		            <li class='dropdown '>
+		                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		                    Form Elements <b class="caret"></b>
+		                </a>
+		                <ul class="dropdown-menu">
+		                    <li>{% url 'django-admindocs-docroot' as docsroot %}</li>
+		                    <li>
+		                      {% if docsroot %}
+		                        <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
+		                    {% endif %}
+                            </li>
+		                    <li><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /</li>
+		                    <li><a href="form-wizard.html">Wizard &amp; File Upload</a></li>
+		                </ul>
+		            </li>
+		            <li><a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a></li>
+		        </ul>
+		        {% endblock %}
+		        <!-- /.nav -->
+		    </div>
+            {% endif %}
+    
+        </nav>
+        <!-- /.navbar primera cabecera -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+        
+
+            
+            
+            
+                
+                
+                
+                
+            
+
+        
+
+

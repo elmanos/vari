@@ -1,0 +1,89 @@
+{% load admin_static %}{% load url from future %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"es-es" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="{% static "admin/lib/bootstrap/css/bootstrap.css" %}" />
+		{% block extrastyle %}{% endblock %}
+
+		{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
+		<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
+		
+		{% block extrahead %}{% endblock %}
+		{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+	</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
+<!-- Wrap -->
+<div id="wrap">
+
+    <!-- Begin: Top -->
+    <div id="top">
+        
+        {% include "admin/includes/navbar.html" %}
+
+        {% include "admin/includes/header.html" %}
+
+    </div>
+    <!-- End: Top -->
+
+    {% block messages %}
+        {% if messages %}
+        <ul class="messagelist">{% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}</ul>
+        {% endif %}
+    {% endblock messages %}
+
+    <!-- Left -->
+    <div id="left">
+	    <div id="content" class="{% block coltype %}colM{% endblock %}">
+	        {% block pretitle %}{% endblock %}
+	        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+	        {% block content %}
+	            {% block object-tools %}{% endblock %}
+	        {{ content }}
+	        {% endblock %}
+	        {% block sidebar %}{% endblock %}
+	        <br class="clear" />
+	    </div>
+    <!-- END Left -->
+    </div>
+</div>
+<!-- END Wrap -->
+
+{% block footer %}
+<div id="footer">
+    <p>2013 &copy; <a href="http://sombrads.com" title="Sombra Desarrollo de Software" alt="Sombra Desarrollo de Software" >Sombra Desarrollo de Software</a></p>
+</div>
+{% endblock %}
+
+
+
+<!-- #helpModal -->        
+<div id="helpModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->        
+<!-- /#helpModal -->
+        
+{% include "admin/includes/footer_scripts.html" %}
+
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+# Instala todas las dependencias de produccion.
+-r requirements/prod.txt
